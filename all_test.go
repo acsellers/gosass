@@ -54,7 +54,7 @@ func compileTest(t *testing.T, fileName string) (result string) {
 	return result
 }
 
-const numTests = 3 // TO DO: read the test dir and set this dynamically
+const numTests = 4 // TO DO: read the test dir and set this dynamically
 
 func TestConcurrent(t *testing.T) {
 	testFunc := func(done chan bool) {
@@ -67,6 +67,7 @@ func TestConcurrent(t *testing.T) {
 				t.Error(fmt.Sprintf("ERROR: couldn't read test/test%d.css", i))
 			}
 			if result != string(desiredOutput) {
+				t.Error(result, string(desiredOutput))
 				t.Error("ERROR: incorrect output")
 			}
 		}
