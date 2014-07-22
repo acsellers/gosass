@@ -1,4 +1,4 @@
-package gosass
+package sassy
 
 import (
 	"fmt"
@@ -28,27 +28,17 @@ const numConcurrentRuns = 200
 
 func compileTest(t *testing.T, fileName string) (result string) {
 
-	ctx := FileContext{
-		Options: Options{
-			OutputStyle:  NESTED_STYLE,
-			IncludePaths: make([]string, 0),
-		},
-		InputPath:    fileName,
-		OutputString: "",
-		ErrorStatus:  0,
-		ErrorMessage: "",
+	ctx := FileSet{
+		Style:      NestedStyle,
+		IncludeDir: []string{},
 	}
 
-	CompileFile(&ctx)
+	f, err := ctx.ParseFile(fileName)
 
-	if ctx.ErrorStatus != 0 {
-		if ctx.ErrorMessage != "" {
-			t.Error("ERROR: ", ctx.ErrorMessage)
-		} else {
-			t.Error("UNKNOWN ERROR")
-		}
+	if err != nil {
+		t.Error("ERROR: ", err)
 	} else {
-		result = ctx.OutputString
+		result = f.Output
 	}
 
 	return result

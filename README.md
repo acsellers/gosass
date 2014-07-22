@@ -1,6 +1,14 @@
-GoSass
+Sassy
 ======
 
-Go language wrapper for LibSass (the C/C++ implementation of Sass).
+Go language interface for the libsass library.
 
-For sample usage, see the file `gosass.go`. But make sure you move it to a different folder or comment it out before building, because the Go build tools don't like having two separate modules in the same folder!
+I was disappointed when the various sass libraries depended on 
+libsass being built as a shared library, and being not really
+idiomatic Go. This library allows you to collect the scss files,
+compile them to css, then serve the files over http.
+
+Missing Functionality
+---------------------
+
+Sass formatted files may not be read at this point.
